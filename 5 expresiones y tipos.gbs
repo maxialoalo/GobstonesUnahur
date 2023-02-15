@@ -1,0 +1,226 @@
+procedure Mover_SegunColor_(direccion,color){
+    /*
+    Proposito: Mover el cabezal en la direccion dada tantas parcelas como bolitas de color dado hay en la celdaactual
+    Parametros:
+        *direccion:direccion indica la direccion hacia donde se moverá el cabezal desde la parcela actual
+        *color indicia el color al cual se evaluaran las bolitas 
+    Precondiciones:
+        *debe haber al menos la misma cantidad de celdas hacia *direccion*¨que la de bolitas de color * color*
+    */
+     repeat(nroBolitas(color)){
+        Mover(direccion)
+     }
+}
+
+//!El bosque
+
+Poner_SemillasAl_(cantidad, direccionDondePoner){
+    /*
+        Propósito: Poner *cantidad* semillas hacia la direccion *direccion* dejando el cabezal en la parcela inicial
+        Parámetros:
+            *cantidad: numero, Indica la cantidad de semillas a poner en la parcela actual
+            *direccionDondePoner: direccion, describe la direccion hacia donde se pondran las semillas
+        Precondiciones: 
+            *Debe haber al menos una parcela hacia la direccion *direccionDondePoner* 
+                        ?o no puede tener arboles o debe estar vacia
+    */
+    Mover(direccionDondePoner)
+    Poner_DeColor_(cantidad,Rojo)
+}
+//ROJO
+Sacar_SemillasEnDiagonalAl_Y_(cantidad, primeraDiagonal, segundaDiagonal){
+    /*
+        Propósito: Sacar *cantidad* semillas la parcela en diagonal horaria al *PrimeraDiagonal* y al *segundaDiagonal* 
+        Parámetros:
+            *cantidad: numero, Indica la cantidad de semillas a Sacar en la parcela actual
+            *direccionDondeSacar: direccion, describe la direccion hacia donde se movera para sacar las semillas
+        Precondiciones: 
+        *Debe haber al menos una parcela en la diagonal al *primeraDiagonal* y *segundaDiagonal* desde la parcela actual
+                        ?o no puede te ner arboles o debe estar vacia
+    */
+    Mover(primeraDiagonal)
+    Mover(segundaDiagonal)
+    Sacar_DeColor_(cantidad,Rojo)
+    Mover(opuesto(primeraDiagonal))
+    Mover(opuesto(segundaDiagonal))
+}
+
+Sacar_ArbolesAl_(cantidad, direccionDondeSacar){
+/*
+        Propósito: Sacar *cantidad* arboles en la parcela lindante en direccion *direccionDondeSacar* 
+        Parámetros:
+            *cantidad: numero, Indica la cantidad de arboles a sacar en la parcela actual
+        Precondiciones: Debe haber al menos una parcela lindante en direccion *direccionDondeSacar* 
+                        ?o no puede tener arboles o debe estar vacia
+    */
+    Mover(direccionDondeSacar)
+    Sacar_DeColor_(cantidad,Verde)
+}
+
+
+Sacar_ArbolesEnDiagonalHorariaAl_YAl_(cantidad, primeraDiagonal, segundaDiagonal){
+/*
+        Propósito: Sacar *cantidad* arboles en la parcela en diagonal horaria al *PrimeraDiagonal* y al *segundaDiagonal* 
+        Parámetros:
+            *cantidad: numero, Indica la cantidad de arboles a sacar en la parcela actual
+            *primeraDiagonal: direccion, la primera direccion hacia donde se moverá el cabezal
+            *segundaDiagonal: direccion, la segunda direccion hacia donde se moverá el cabezal
+        Precondiciones: 
+            *Debe haber al menos una parcela en la diagonal al *primeraDiagonal* y *segundaDiagonal* desde la parcela actual
+            *debe haber al menos *cantidad* arboles en la pacela desitno
+            *primeraDiagonal y SegundaDiagonal no pueden ser opuestas ni iguales
+                      
+    */
+    Mover(primeraDiagonal)
+    Mover(segundaDiagonal)
+    Sacar_DeColor_(cantidad,Verde)
+    Mover(opuesto(primeraDiagonal))
+    Mover(opuesto(segundaDiagonal))
+}
+
+procedure DibujarBandaGloriosaDeAncho_(ancho){
+    /*
+        Propósito: dibuja una banda diagonal de color rojo de cuatro celdas de alto y de *ancho* celdas de ancho
+        Parámetros:
+            *ancho: numero, describe el ancho que tendra la banda
+        Precondiciones:
+            *Debe haber al menos *ancho*celdas hacia el este y de ancho debe haber *ancho* + 4 celdas hacia el Norte
+    */
+    DibujarLineaRojaDe_(4)
+    repeat(ancho-1){
+    IrAlInicioDeSiguienteColumnaDe_(4)
+    DibujarLineaRojaDe_(4)
+    }
+}
+
+procedure DibujarFilaRojaDe_(largo){
+    /*
+        Propósito: Dibujar una columna roja de 
+        Parámetros:
+            *Largo: numero, describe el largo de la columna roja
+        Precondiciones:
+            * Debe haber al menos *¨largo* celdas hacia el norte desde la celda actual
+    */
+    repeat(largo){
+        Poner(Rojo)
+        Mover(Norte)
+    }
+    Poner(Rojo)
+}
+
+procedure IrAlInicioDeSiguienteColumnaDe_(largo){
+    /*
+        Propósito: Lleva el cabezal al inicio de la siguiente columna comenzando desde el final de la columna actual 
+        Parámetros:
+            *largo: numero, describe el largo de la columna
+        Preconmdiciones:
+            * Debe haber al menos *largo*-1 celdas hacia el Sur desde la celda actual y una celda hacia el Este
+    */
+    repeat(largo){
+        Mover(Sur)
+    }
+    Mover(Este)
+}
+
+//5
+procedure EnviarAliadosParaDuplicarEnemigos(){
+    /*
+    Propósito: Agrega soldados aliados en la celda actual en cantidad suficiente para que haya el doble de aliados que de soldados enemigos.
+    Preciondiciones:
+        * Ninguna
+    */
+    repeat((nroBolitas(Rojo)*2)-(nroBolitas(Negro))){
+        Poner(Negro)
+    }
+}
+
+procedure PelearLaBatalla(){
+    /*
+    Propósito: Simula una batalla, sacando 3 soldados aliados por cada dos soldados enemigos.
+    Precondiciones:
+        *Debe haber al menos 3 soldados aliados por cada 2 soldados enemigos.
+    */
+    repeat(nroBolitas(Rojo) div 2  *  3){
+        Sacar(Negro)
+    }
+    repeat(nroBolitas(Rojo)){
+        Sacar(Rojo)
+    }
+}
+
+procedure SacarTodasLasDeColor_(colorASacar){
+    /*
+    Propósito: Sacar todas las bolitas de color *colorASacar* de la celda actual
+    Parametros:
+        *colorASacar: color, Describe el color de la bolita a sacar
+    Precondiciones: 
+        *Ninguna
+    
+    */
+    Sacar_DeColor_(nroBolitas(colorASacar), colorASacar)
+}
+
+//7
+
+procedure DibujarBandaDeAlto_YAncho_DeColor_(alto,ancho,color){
+    /*
+    Propósito: dibuja una banda diagonal de color *color* de *alto* celdas de alto y de *ancho* celdas de ancho
+        Parámetros:
+            *ancho: numero, describe el ancho que tendra la banda
+            *color: color, describe el color del cual se dibujara la banda
+            *alto: numero, describe el alto que tendrá la banda
+        Precondiciones:
+            *Debe haber al menos *ancho*celdas hacia el este y de ancho debe haber *alto* hacia el Norte
+    */
+    DibujarFila_De_(color, alto)
+    repeat(ancho-1){
+    IrAlInicioDeSiguienteColumnaDe_(alto)
+    DibujarFila_De_(color, alto)
+    }
+}
+
+
+procedure DibujarFila_De_(color,largo){
+    /*
+        Propósito: Dibujar una columna roja de 
+        Parámetros:
+            *Largo: numero, describe el largo de la columna roja
+            *color: color, describe el color para dibujar la linea
+        Precondiciones:
+            * Debe haber al menos *¨largo* celdas hacia el norte desde la celda actual
+    */
+    repeat(largo){
+        Poner(color)
+        Mover(Norte)
+    }
+    Poner(color)
+}
+
+procedure PasarPalabraActualAMayusculas() {
+    /*
+        PROPÓSITO: 
+           Codificar la palabra en minusculas escrita al este de la celda actual,
+        PRECONDICIONES:
+
+            *Debe haber una fila vacía al norte de la celda actual
+            *Debe haber la misma cantidad de bolitas rojas como letras contenga la palabra en la celda actual
+    */
+    repeat(nroBolitas(rojo)){
+    Mover(Este)
+    PasarLetraAMayusculaAlNorte()    
+    }    
+}
+
+procedure PasarLetraAMayusculaAlNorte(){
+    /*
+    Propósito:Pasar la letra en la celda actual a mayusculas al norte de la celda actual.
+    Precondiciones:
+        *Debe haber una letra representada en codigo ASCII en la celda actual
+        *Debe haber al menos una celda lindante al norte
+    */
+    repeat(nroBolitas(negro)-32){
+        Mover(Norte)
+        Poner(Negro)
+        Mover(Sur)
+    }
+}

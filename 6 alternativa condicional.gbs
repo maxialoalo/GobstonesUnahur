@@ -1,0 +1,427 @@
+
+//3
+procedure SacarUnaFicha_SiSePuede(colorDeLaFicha){
+    /*
+    Propósito: sacar una ficha de color *colorDeLaFicha* siempre y cuando la misma esté en la celda actual.
+    Parámetros:
+        *colorDeLaFicha:,color, el color de la ficha a sacar
+    Precondiciones:
+        *Ninguna
+    */
+    if (hayFichaColor_(colorDeLaFicha)) {
+        Sacar(colorDeLaFicha)
+    }
+}
+
+function hayFichaColor_(colorDeLaFicha) {
+    /*
+        PROPÓSITO:  Indica si hay al menos una ficha de color *color de la ficha* en la celda actual
+        PARÁMETROS:
+            * colorDeLaFicha: color, el color de la ficha a mirar
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (hayBolitas(colorDeLaFicha))
+}
+
+//B
+procedure DesempatarParaElLocal_Contra_(colorDelLocal,colorDelVisitante){
+    /*
+    Propósito: otorga un punto al jugador con color *colorDelLocal* en caso de que haya empate.
+    Parámetros: 
+        *colorDelLocal:color, describe el color del local
+        *colorDelVisitante:color, describe el color del visitante
+    Precondiciones:
+        *Ninguna
+    */
+
+    if (nroBolitas(colorDelLocal)==nroBolitas(colorDelVisitante)) {
+        OtorgarUnPuntoAl_(colorDelLocal)
+    }
+}
+
+procedure OtorgarUnPuntoAl_(colorDeEqipo) {
+    /*
+    Propósito: otorga un punto al jugador con color *colorDeEquipo* 
+    Parámetros: 
+        *colorDelLocal:color, describe el color del local
+        
+    Precondiciones:
+        *Ninguna
+    */
+    Poner(colorDeEquipo)
+}
+
+//C
+procedure ExpandirBacteriaDeLaColonia(){
+    /*
+        Propósito: Agrega una bacteria más en caso que haya suficientes nutrientes y haya un cultivo de bacterias en la celda actual
+        Precondiciones:
+            *Ninguna
+        Observaciones:
+            *Por cada bacteria expandida se consumen 2 nutrientes
+    */
+
+    if (hayBolitas(Verde) && (nroBolitas(Rojo)>=2)) {
+        ExpandirBacteria()
+    }
+}
+
+procedure ExpandirBacteria(){
+    /*
+    proposito; expandir bacteria de la colonia
+    precondiciones:
+        *Debe haber al menos una bacteria y debe haber al menos dos nutrientes 
+    */
+    Sacar_Nutrientes(2)
+    PonerBacteria()
+}
+
+procedure PonerBacteria(){
+    /*
+    Propósito: Pone juna  bacteria en la celda actial
+    Precondicoiones: ninguna
+    */
+    Poner(Verde)
+}
+
+
+procedure PonerFlecha_AlNorteSiCorresponde(colorDeLaFlecha) {
+    /*
+        PROPÓSITO: Pone una flecha representada por una bolita de color *colorDeLaFlechA* hacia el norte si existe espacio para moverse en esa direccion
+        PARÁMETROS:
+            * colorDeLaFlecha: color, el color de la flecha a poner
+        PRECONDICIONES:
+            * Ninguna
+    */
+    if (puedeMover(Norte)) {
+        PonerFlecha_AlNorte(colorDeLaFlecha)
+    }
+}
+
+procedure PonerFlecha_AlNorte(){
+    /*
+        PROPÓSITO: Pone una flecha  *colorDeLaFlechA* hacia el norte
+        PARÁMETROS:
+            * colorDeLaFlecha: color, el color de la flecha a poner
+        PRECONDICIONES:
+            * Debe haber al menos una flecha al norte
+    */
+    Mover(Norte)
+    PonerFlecha_(colorDeLaFlecha)
+    Mover(Sur)
+}
+
+procedure PonerFlecha_(colorDeLaFlecha){
+    /*
+    Propósito: Poner una flecha *colorDeLaFlecha*
+    Parámetros:
+        *colorDeLaFlecha: color, el color de la flecha a poner
+    Precondiciones:
+        *Ninguna
+    */
+    Poner(colorDeLaFlechA)
+}
+
+//4
+
+
+//a
+procedure Poner_Si_(color, condición){
+    /*
+        PROPÓSITO:  Pone una bolita de color *color* en la celda actual si se cumple la condicion *condicion*
+        PARÁMETROS:
+            * color: color, describe el color de la bolita a poner
+            * condicion:booleano, La condicion que se debe cumplir para poner la bolita
+        PRECONDICIONES:
+            * ninguna
+    */
+
+    if(condicion){
+        Poner(color)
+    }
+    
+}
+
+//b
+procedure Sacar_Si_(color, condición){
+    /*
+        PROPÓSITO:  Saca una bolita de color *color* si se cumple la condicion *condicion*
+        PARÁMETROS:
+            * color: color, describe el color de la bolita a sacar
+            * condicion:booleano, indica si se cumple la condicion
+        PRECONDICIONES:
+            * Debe haber al menos una bolita de color *color* si se cumple la condición *condición*
+    */
+
+    if(condicion){
+        Sacar(color)
+    }
+    
+}
+
+
+
+//c
+procedure Mover_Si_(direccion, condición){
+    /*
+        PROPÓSITO:  Mueve el cabezal hacia el *direccion* si se cumple la condicion *condicion*
+        PARÁMETROS:
+            * direccion: direccion, describe la direccion hacia donde mover
+            * condicion:booleano, indica si se cumple la condicion
+        PRECONDICIONES:
+            * ninguna
+    */
+
+    if(condicion){
+        Mover(direccion)
+    }
+    
+}
+
+
+
+
+// EN PAPEL Como Nova sigue confundido con las buenas prácticas de programación, nos
+// consultó sobre cuál de las siguientes dos soluciones que se le ocurrieron es la correcta. El
+// problema es sacar exactamente 8 bolitas de color Azul y la precondición, como es de esperar,
+// es que haya al menos 8 bolitas azules en la celda actual. Explicarle a Nova cuál es la correcta, y
+// por qué la otra no es una buena opción.
+procedure SacarExactamente8BolitasAzulesOpciónA() {
+/*
+PROPÓSITO: Sacar exactamente 8 bolitas de color Azul
+PRECONDCIONES: Hay al menos 8 bolitas de color azul
+*/
+repeat (8) {
+Sacar(Azul)
+}
+// PEL Ayudar a Nova a generalizar este procedimiento, escribiendo
+// SacarExactamente_BolitasDeColor_(cantidadASacar, colorASAcar)
+
+    procedure SacarExactamente_BolitasDeColor_(cantidadASacar, colorASAcar){
+        /*
+        Propósito: Saca exactamente *cantidadASacar* bolitas de color *colorASacar*
+        Precondiciones: 
+            *Hay al menos *cantidadASAcar¨* bolitas de color * colorASAcar*
+        Parámetros: 
+            *cantidadASAcar: numero, la cantidad de bolitas a sacar
+            *colorASAcar: color, el color de las bolitas a sacar
+        */
+        repeat (cantidadASacar){
+            Sacar(colorASAcar)
+        }
+    }
+
+
+
+//6
+
+6. ¿Vamos al banco? - Parte 1
+En este ejercicio utilizaremos el tablero de Gobstones para representar cuentas bancarias. Cada celda
+representará a una cuenta bancaria, y en cada una de ellas puede haber dinero en distintas monedas,
+que representaremos con distintos colores:
+● bolitas negras para pesos argentinos.
+● bolitas verdes para dólares estadounidenses.
+● bolitas azules para euros.
+● bolitas rojas para yuanes chinos.
+Se pueden hacer tres operaciones: depósitos, extracciones y conversiones a divisa extranjera. Las
+extracciones pueden hacerse en cualquier moneda, pero los depósitos siempre serán en pesos.
+En el caso en que se quiera depositar un monto en una moneda extranjera, se aplicará
+automáticamente la conversión a pesos según el precio de venta dado en la siguiente tabla:
+Precios de venta
+InPr - P6. Alternativas Condicionales
+1 dólar 80 pesos
+1 euro 90 pesos
+1 yuan 12 pesos
+En cuanto a la conversión a divisa extranjera, el banco actualmente aplica las siguientes tarifas para la
+compra de divisa:
+Precios de compra
+100 pesos 1 dólar
+115 pesos 1 euro
+17 pesos 1 yuan
+Realizar los siguientes procedimientos para poder manipular la cuenta:
+a. Depositar_EnMoneda_ComoPesos(cantidadADepositar, moneda), que dada una
+cantidad de dinero a depositar y un color que representa la moneda en la que está representado
+ese monto, agrega a la cuenta la cantidad de pesos equivalente a lo indicado para depositar. En
+este procedimiento hay que aplicar la conversión indicada para el precio de venta.
+Ej.
+Celda inicial Depositar_EnMoneda_ComoPesos(2, Rojo) Depositar_EnMoneda_ComoPesos(5, Verde)
+
+
+//?Versión en caso que se indique la cantidad a depositar en moneda extranjera
+procedure Depositar_EnMoneda_ComoPesos(cantidadADepositar, moneda){
+    /*
+    Propósito: Agrega a la cuenta la cantidad equivalente de pesos equivalente a *moneda*
+    Parámetros: 
+        *cantidadADepositar: numero,Describe la cantidad a depositar 
+        *moneda: color, La moneda de la cual se agregará la cantidad equivalente en pesos a la cuenta
+    Precondiciones:
+        *Ninguna
+    */
+    if(moneda==Verde){
+       Poner_DeColor_(cantidadADepositar*80, Negro)
+    }else if(moneda==Azul){
+        Poner_DeColor_(cantidadADepositar*90, Negro)
+    }
+    else if(moneda==Rojo){
+        Poner_DeColor_(cantidadADepositar*12, Negro)
+    }else {
+        Poner_DeColor_(cantidadADepositar, Negro)
+    }
+}
+
+
+//?Version en caso de que la cantidad indicada sea los pesos que queres cambiar
+
+procedure Depositar_EnMoneda_ComoPesos(cantidadADepositar, moneda){
+    /*
+    Propósito: Agrega a la cuenta la cantidad equivalente de pesos equivalente a *moneda*
+    Parámetros: 
+        *cantidadADepositar: numero,Describe la cantidad a depositar 
+        *moneda: color, La moneda de la cual se agregará la cantidad equivalente en pesos a la cuenta
+    Precondiciones:
+        *Ninguna
+    */
+    if(moneda==Verde){
+       Depositar_EnMoneda_(cantidadADepositar div 80, Negro)
+    }else if(moneda==Azul){
+        Depositar_EnMoneda_(cantidadADepositar div 90, Negro)
+    }
+    else if(moneda==Rojo){
+        Depositar_EnMoneda_(cantidadADepositar div 12, Negro)
+    }else{
+        Depositar_EnMoneda_(cantidadADepositar, Negro)
+    }
+}
+
+procedure Depositar_EnMoneda_(cantidad, moneda){
+    Poner_DeColor_(cantidad, moneda)
+}
+
+
+b. ExtraerHasta_EnMoneda_(cantidadAExtraer, moneda), que dada una cantidad de
+dinero a extraer y un color que representa la moneda en la que se va a extraer, remueve de la
+cuenta la cantidad que se indica. Si no hubiera tanto dinero como el solicitado, se extrae todo lo
+que haya.
+Celda inicial ExtraerHasta_EnMoneda_(5, Rojo) ExtraerHasta_EnMoneda_(10, Azul)
+
+
+procedure ExtraerHasta_EnMoneda_(cantidadAExtraer, moneda){
+    /*
+    Propósito: Remueve de la cuenta *cantidadAExtraer* *moneda*. En caso de no haber la cantidad suficiente se extrae todo lo que haya
+    Parámetros:
+        * cantidadAExtraer: numero, la cantidad de dinero maxima que se va a extraer
+        *moneda: color, representa la moneda a operar
+    Precondiciones:
+        *Ninguna
+    */
+    if (cantidadAExtraer<nroBolitas(moneda)) {
+        Sacar_DeColor_(cantidadAExtraer, moneda)
+    }else{
+        Sacar_DeColor_(nroBolitas(moneda))
+    }
+}
+
+
+
+
+InPr - P6. Alternativas Condicionales
+c. ConvertirHasta_PesosA_(pesosAConvertir, moneda), que dada una cantidad de
+pesos a convertir y un color que representa la moneda en la cual se quiere convertir, remueve
+los pesos de la cuenta y agrega la moneda solicitada. Si en la cuenta hubiera menos pesos de
+lo solicitado, se convierte todo lo que haya.
+Celda inicial ConvertirHasta_PesosA_(68, Rojo) ConvertirHasta_PesosA_(100, Verde)
+El último ejemplo es interesante: se piden convertir 100 pesos a dólares pero no hay 10 pesos en la
+cuenta, por lo que se va a intentar convertir el total de pesos que haya, 90. Con 90 pesos, no se llega a
+comprar ningún dólar, y como Gobstones solo trabaja con números enteros, no es posible tener medio
+dólar, por lo que queda en cero dólares.
+
+
+procedure ConvertirHasta_PesosA_(pesosAConvertir, moneda){
+    /*
+    Propósito: Convierte *pesosAConvertir* pesos a *moneda*
+    Parámetros:
+        *pesosAConvertir: numero, la cantidad de pesos a convertir
+        *moneda: color, la moneda a la cual se va a convertir
+    Precondiciones:
+        *Ninguna
+    */
+    if(moneda==Verde){
+        ConvertirHasta_PesosADolares(pesosAConvertir)
+    }else if(moneda==Azul){
+        ConvertirHasta_PesosAEuros(pesosAConvertir)
+    }else{
+        ConvertirHasta_PesosAYuanes(pesosAConvertir)
+    }
+}
+
+procedure ConvertirHasta_PesosADolares(pesosAConvertir){
+    /*
+    Propósito: Convierte hasta *pesosAConvertir* pesos a Dolares, en caso de no haber suficiente monto se convierte el total de los pesos
+    Parámetros:
+        *pesosAConvertir: numero, la cantidad de pesos que se van a convertir a dolares 
+    Precondiciones:
+        *Ninguna
+    */
+    if(nroBolitas(Negro)>pesosAConvertir){
+        Sacar_DeColor_(pesosAConvertir,Negro)
+        Poner_DeColor_(Verde)
+    }else{
+        Poner_DeColor_(nroBolitas(Verde), Negro)
+        Sacar_DeColor_(nroBolitas(Negro),Negro)
+    }
+}
+
+procedure ConvertirHasta_PesosAEuros(pesosAConvertir){
+    /*
+    Propósito: Convierte hasta *pesosAConvertir* pesos a Dolares, en caso de no haber suficiente monto se convierte el total de los pesos
+    Parámetros:
+        *pesosAConvertir: numero, la cantidad de pesos que se van a convertir a dolares 
+    Precondiciones:
+        *Ninguna
+    */
+    if(nroBolitas(Negro)>pesosAConvertir){
+        Sacar_DeColor_(pesosAConvertir,Negro)
+        Poner_DeColor_(Azul)
+    }else{
+        Poner_DeColor_(nroBolitas(Azul), Negro)
+        Sacar_DeColor_(nroBolitas(Negro),Negro)
+    }
+}
+
+procedure ConvertirHasta_PesosAYuanes(pesosAConvertir){
+    /*
+    Propósito: Convierte hasta *pesosAConvertir* pesos a Dolares, en caso de no haber suficiente monto se convierte el total de los pesos
+    Parámetros:
+        *pesosAConvertir: numero, la cantidad de pesos que se van a convertir a dolares 
+    Precondiciones:
+        *Ninguna
+    */
+    if(nroBolitas(Negro)>pesosAConvertir){
+        Sacar_DeColor_(pesosAConvertir,Negro)
+        Poner_DeColor_(Rojo)
+    }else{
+        Poner_DeColor_(nroBolitas(Rojo), Negro)
+        Sacar_DeColor_(nroBolitas(Negro),Negro)
+    }
+}
+
+
+d. RealizarCorridaCambiaria(), que dado un tablero de 1 única fila y 10 columnas, donde
+cada celda representa una cuenta bancaria, se realiza una corrida cambiaria, donde en cada
+cuenta se cambia la totalidad de los pesos a dólares.
+
+procedure RealizarCorridaCambiaria(){
+    /*
+    Propósito: Realiza un recorrido de 10 cuentas bancarias hacia el este cambiando todos los pesos que haya en las cuentas a dolares 
+    Precondiciones:
+        *Debe haber al menos 10 columnas
+    */
+    ConvertirHasta_PesosA_(nroBolitas(negro), Verde)
+    repeat(10){
+        Mover(Este)
+        ConvertirHasta_PesosA_(nroBolitas(negro), Verde)
+    }
+}   

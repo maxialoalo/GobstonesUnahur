@@ -1,0 +1,76 @@
+procedure IrAlBorde_(dirección){
+    /*
+    Propósito: Ir al borde *direccion* de la celda actual
+    Parámetros:
+        *direccion: direccion, la direccion del borde adonde  irá el cabezal
+    Precondiciones:
+        *Ninguna
+    */
+    while(puedeMover(direccion)){
+        Mover(direccion)
+    }
+}
+
+
+procedure  SacarTodasLasDeColor_(color){
+    /*
+    Propósito: Saca todas las bolitas *color* de la celda actual
+    Parámetros:
+        *color:color, el color de las bolitas a sacar
+    Precondiciones:
+        *Ninguna
+    */
+    while(hayBolitas(color)){
+        Sacar(color)
+    }
+}
+
+
+procedure VaciarFilaDe_(color) {
+    /*
+        PROPÓSITO: Quita todas las bolitas *color* de la fila actual
+        Parámetros:
+            *color:color, el color de las bolitas a sacar
+        PRECONDICIONES:
+            * Ninguna
+    */
+    IrAlBorde_(Oeste)
+    while(puedeMover(Este)){
+        SacarTodasLasDeColor_(color)
+        Mover(Este)
+    }
+    SacarTodasLasDeColor_(color)
+}
+
+procedure VaciarFilaDe_HaciaEl_(color, dirección){
+    /*
+        PROPÓSITO:  Quita todas las bolitas *color* desde la celda actual hasta el borde *direccion* 
+        PARÁMETROS:
+            *color:color, el color de las bolitas a sacar
+            *direccion:direccion, la direccion hacia donde se moverá el cabezal sacando bolitas
+        PRECONDICIONES:
+            * Ninguna
+    */
+    SacarTodasLasDeColor_(color)
+    while(puedeMover(direccion)){
+        SacarTodasLasDeColor_(color)
+        Mover(direccion)
+    }
+}
+
+procedure VaciarTableroDe_(color) {
+    /*
+        PROPÓSITO:  Saca todas las bolitas *¨color*¨del tablero
+        PARÁMETROS:
+            *color:color,el color de las bolitas a sacar
+        PRECONDICIONES:
+            * Ninguna
+    */
+    IrAlBorde_(Sur)
+    IrAlBorde_(Oeste)
+    VaciarFilaDe_HaciaEl_(color,Este)
+    while(puedeMover(Norte)){
+        IrAlInicioDeLaSiguienteFila()
+        VaciarFilaDe_HaciaEl_(color,Este)
+    }
+}

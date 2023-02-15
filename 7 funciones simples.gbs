@@ -1,0 +1,649 @@
+
+a. La cantidad total de bolitas de la celda actual.
+
+//1 a
+
+function totalDeBolitasAcá() {
+    /*
+        PROPÓSITO:  Describe el total de las bolitas en la celda actual
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Rojo)+ nroBolitas(Verde) + nroBolitas(Negro) + nroBolitas(Azul))
+}
+
+b. Sí hay más de 5 bolitas en total en la celda actual.
+
+// b 
+
+function hayMásDe5BolitasAcá() {
+    /*
+        PROPÓSITO:  Indica si hay mas de 5 bolitas en la celda actual
+        TIPO: Booleano 
+        PRECONDICIONES:
+            * Ninguna
+    */
+    return( totalDeBolitasAcá() >5)
+}
+
+//c
+function hay5BolitasAcá() {
+    /*
+        PROPÓSITO:  Indica si hay exactamente 5 bolitas en la celda actual
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (totalDeBolitasAcá()==5)
+}
+
+//d
+
+function hay5BolitasOMásAcá(){
+    /*
+    Propósito: Indica si hay al menos 5 bolitas en la celda actual
+    Tipo: Booleano 
+    Precondicoines: Ninguna
+    */
+    return(totalDeBolitasAcá()>=5)
+}
+//e
+
+function hayBolitasDeTodosLosColores() {
+    /*
+        PROPÓSITO:  Indica si hay bolitas de todos los colores en la celda actual
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (hayBolitas(Azul)&&hayBolitas(Negro)&& hayBolitas(Rojo) && hayBolitas(Verde))
+}
+
+f. Si la celda actual está vacía.
+
+function esCeldaVacía() {
+    /*
+        PROPÓSITO:  Indica si la celda actual está vacia
+        TIPO: Booleano 
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (not (hayBolitas(Azul))&& not (hayBolitas(Negro))&& not (hayBolitas(Rojo)) && not (hayBolitas(Verde)))
+}
+g. Sí a la celda actual le faltan bolitas de alguno de los colores y no está vacía.
+
+function leFaltaAlgúnColor() {
+    /*
+        PROPÓSITO:  indica si la celda actual no está vacía pero le falta algún color
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (not (esCeldaVacía()) && not (tieneUnaDeCada()))
+}
+
+
+b. tieneUnaDeCada(), que indica si la celda actual tiene al menos una bolita de cada color.
+
+function tieneUnaDeCada() {
+    /*
+        PROPÓSITO:  Indica si la celda actual tiene al menos una bolita de cada color
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return ( hayBolitas(Azul)&&hayBolitas(Negro)&& hayBolitas(Rojo) && hayBolitas(Verde))
+}
+
+c. esCeldaConBolitas(), que indica si la celda actual tiene al menos una bolita, de cualquier
+color.
+
+function esCeldaConBolitas() {
+    /*
+        PROPÓSITO:  Indica si la celda actual tiene al menos una bolita de cualquier color
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (hayBolitas(Azul)||hayBolitas(Negro)|| hayBolitas(Rojo) || hayBolitas(Verde))
+}
+
+
+
+
+
+//3 
+
+//A
+
+function cantidadDeSoldadosDe_(colorDelEjercito){
+    /*
+    Propósito: Describe la cantidad de soldados del ejercito *colorDelEjercito* en la celda actual
+    Parámetros:
+        *colorDelEjercito: color, el color del ejercito a contar
+    Tipo: Numero
+    Precondiciones:
+        *Ninguna
+    */
+    return(nroBolitas(colorDelEjercito))
+}
+
+
+//B 
+
+procedure EnviarAliadosParaDuplicarEnemigos(){
+    /*
+    Propósito: Agrega soldados aliados en la celda actual en cantidad suficiente para que haya el doble de aliados que de soldados enemigos.
+    Preciondiciones:
+        * Ninguna
+    */
+    repeat((cantidadDeSoldadosDe_(Rojo)*2)-(cantidadDeSoldadosDe_(Negro))){
+        AgregarSoldadoDelEjercito_(Negro)
+    }
+}
+
+procedure AgregarSoldadoDelEjercito_(colorDelEjercito) {
+    /*
+        PROPÓSITO:  Agrega un soldado del ejercito *colorDelEjercito* en la celda actual
+        Parámetros:
+            *colorDelEjercito: color, el color del ejercito del soldado a agregar
+        PRECONDICIONES:
+            * Ninguna
+    */
+    Poner(colorDelEjercito)
+}
+
+
+
+//C
+
+function esCeldaIndefensa() {
+    /*
+        PROPÓSITO:  Indica si no hay soldados ¿aliados? en la celda actual
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (not (haySoldadosDelEjercito_(Negro)))
+}
+
+function haySoldadosDelEjercito_(colorDelEjercito){
+    /*
+    Propósito: Indica si hay soldados del ejercito *colorDelEjercito*
+    Parámetros:
+        *colorDelEjercito: color, el color del ejercito
+    Tipo: Booleano
+    Precondiciones:
+        *Ninguna
+    */
+    return(hayBolitas(colorDelEjercito))
+}
+
+d. estadoDeEmergencia() que indica si existen más de 100 soldados enemigos, y además la
+celda está indefensa.
+
+function estadoDeEmergencia() {
+    /*
+        PROPÓSITO:  Indica si existen mas de 100 soldados enemigos y la celda está indefensa
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (not (haySoldadosDelEjercito_(Negro)) && cantidadDeSoldadosDe_(Rojo)>100)
+}
+
+
+
+//E
+
+function hayAlMenos_AliadosPorCada_Atacantes(cantidadDefensa, cantidadAtaque) {
+    /*
+        PROPÓSITO:  Indica si hay por lo menos *cantidadDefensa* soldados aliados por cada *cantidadAtaque* soldados enemigos en la celda actual.
+        PARÁMETROS:
+            * cantidadDefensa: numero, el numero de soldados aliados
+            * cantidadAtaque: numero, el numero de soldados enemigos atacantes.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (cantidadDeSoldadosDe_(Negro)==cantidadDefensa * cantidadAtaque)
+}
+
+
+//F
+
+function aliadosNecesariosParaDefensaEficazContra_(
+cantidadDeSoldadosEnemigosAdicionales) {
+    /*
+        PROPÓSITO: Describe el numero de soldados aliados que faltan para defender la celda actual si a ella se le suman *cantidadDeSoldadosEnemigosAdicionales* enemigos
+        PARÁMETROS:
+            *cantidadDeSoldadosEnemigosAdicionales:numero, el numero de enemigos adicionales
+        TIPO: Numero
+        PRECONDICIONES:
+            * No hay suficientes aliados para combatir los enemigos en la celda actual
+    */
+    return (cantidadDeSoldadosEnemigosAdicionale *3 div 2)
+}
+
+
+//4
+
+// A continuación se dan una serie de funciones que se consideran primitivas, es decir, que
+// puede asumir realizadas y no debe implementarlas de ninguna forma.
+// hayUnPlanetaA_Hacia_(distancia, dirección)
+// /*
+// PROPÓSITO: Indica si hay un planeta a **distancia** celdas hacia
+// **dirección**.
+// PARÁMETROS:
+// * distancia: Número - La cantidad de celdas a la cual se
+// desea buscar un planeta.
+// * dirección: Dirección - La dirección hacia la cual mirar el planeta.
+// PRECONDICIONES:
+// * Hay al menos **distancia** celdas en dirección **dirección**.
+// * El cabezal está sobre la nave.
+// TIPO: Booleano
+// */
+// combustibleRestante()
+// /*
+// PROPÓSITO: Indica la cantidad de combustible que le queda a la nave.
+// PRECONDICIONES:
+// * El cabezal está sobre la nave.
+// TIPO: Número
+// */
+// Utilizando dichas funciones, se pide que se definan las siguientes, sin hacer suposiciones sobre la
+// representación.
+// a. sePuedeAterrizarA_Hacia_(distanciaAPlaneta, direcciónAPlaneta), que
+// asumiendo que el cabezal se encuentra sobre la nave y hay al menos distanciaAPlanera celdas
+// en dirección direcciónAPlaneta, indica si hay un planeta a distanciaAPlaneta en la dirección
+// direcciónAPlaneta y sí el combustible es suficiente para llegar al mismo.
+// La nave consume una única unidad de combustibe por cada celda que deba moverse.
+
+
+//A
+function sePuedeAterrizarA_Hacia_(distanciaAPlaneta, direcciónAPlaneta) {
+    /*
+        PROPÓSITO:  Indica si hay un planeta a *distanciaAPlaneta* en direccion *direccionAPlaneta* y si el combustible es suficiente para llegar al mismo
+        PARÁMETROS:
+            * distanciaAPlaneta:numero,la cantidad de celdas a la cual se desea buscar un planeta para aterrizar.
+            * direcciónAPlaneta: direccion,La dirección hacia la cual mirar el planeta.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (combustibleRestante()>=distanciaAPlaneta && hayUnPlanetaA_Hacia_(distanciaAPlaneta, direcciónAPlaneta))
+}
+
+
+b. Sabiendo que el cabezal se encuentra sobre la nave y a exactamente 3 celdas de distancia de
+todos los bordes, se pide que escriba la función hayUnPlanetaRecto(), que indica que
+existe un planeta en cualquiera de las direcciones, a cualquier distancia desde la nave.
+
+//B
+
+function hayUnPlanetaRecto() {
+    /*
+        PROPÓSITO:  indica si existe un planeta en cualquiera de las direcciones, a cualquier distancia desde la nave.
+        TIPO: Booleano
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (hayUnPlanetaRectoHacia_(Norte)||hayUnPlanetaRectoHacia_(Este)|| hayUnPlanetaRectoHacia_(Sur)|| hayUnPlanetaRectoHacia_(Oeste))
+}
+
+function hayUnPlanetaRectoHacia_(direccion){
+    /*
+    Propósito: Indica si hay un planeta recto hacia *direccion* desde la celda actual
+    Parámetros: direccion, direccion, la direccion hacia donde se desea saber si hay un planeta
+    Tipo:Booleano
+    Precondiciones:
+        *Debe haber al menos 3 celdas en cada una de las direcciones
+        *El cabezal se encuentra sobre la nave
+    */
+    return(hayUnPlanetaA_Hacia_(1, dirección)||hayUnPlanetaA_Hacia_(2, dirección)|| hayUnPlanetaA_Hacia_(3, dirección))
+}
+
+5. El bosque, parte 4
+Continuaremos utilizando el mismo dominio del bosque que venimos utilizando en las prácticas
+anteriores. Esta vez se pide escribir los siguientes procedimientos que modelan el bosque. Considerar
+la reutilización de los procedimientos hechos en las partes anteriores y la definición de nuevas
+funciones necesarias para no tener que depender de la representación dada.
+a. GerminarSemilla(), que transforma una semilla en un árbol en la celda actual. La
+germinación consume tres unidades de nutrientes. Si en la celda no hay semilla, o no hay
+suficientes nutrientes, no se hace nada.
+ procedure GerminarSemilla() {
+    /*
+        PROPÓSITO: Transforma una semilla en un arbol en la celda actual
+        PRECONDICIONES:
+            * Ninguna
+    */
+    if(haySemillaAcá()&& hay_NutrientesAcá(3)){
+        Sacar(semilla())
+        Sacar_Nutrientes(3)
+        Poner(arbol())
+    }
+ }
+
+ procedure Sacar_Nutrientes(cantidad){
+    /*
+    Propósito: Saca *cantidad* nutrientes de la celda actual
+    Parametros:
+        *cantidad:numero, la cantidad de nutrientes
+    Precondiciones:
+        *¨Debe haber al menos *cantidad* de nutrientes en la celda actual
+    */
+    repeat(cantidad){
+        Sacar(nutriente())
+    }
+ }
+
+
+function semilla() {
+    /*
+        PROPÓSITO:  Representa una semilla
+        TIPO: Color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Negro)
+}
+
+function nutriente() {
+    /*
+        PROPÓSITO: Representa un nutriente
+        TIPO: Color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Rojo)
+}
+
+function arbol() {
+    /*
+        PROPÓSITO:  Representa un arbol
+        TIPO: color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Verde)
+}
+
+
+
+
+b. AlimentarÁrboles(), que hace que los árboles de la celda actual se alimenten,
+consumiendo un nutriente cada uno. El único cambio que hay que hacer es la eliminación de
+los nutrientes. Si hay menos nutrientes de lo que se necesita, se consumen todos los que hay.
+
+
+procedure AlimentarArboles() {
+    /*
+        PROPÓSITO:  Alimenta a los arboles de la celda actual consumiendo un nutriente cada uno.
+        PRECONDICIONES:
+            * Ninguna
+    */
+    Sacar_Nutrientes(cantidadDeArbolesAca())//! if cantidadDeArboles<= nutrientes 
+}
+
+function cantidadDeArbolesAca() {
+    /*
+        PROPÓSITO:  Describe la cantidad de arboles en la celda actual
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (nroBolitas(Verde))
+}
+
+
+
+c. ExplotarBomba(), que explota una bomba en la celda actual, eliminando árboles. Al explotar,
+una bomba derriba 5 árboles en la celda actual y 3 en la celda lindante al Norte. Si la celda
+actual está en el borde Norte, entonces solo se eliminan los árboles de la celda actual.
+Atención: cuando haya menos árboles de los que la bomba puede eliminar, entonces elimina
+los que haya. La bomba se consume en el proceso, o sea, hay que eliminarla.
+
+
+procedure ExplotarBomba() {
+    /*
+        PROPÓSITO:  Explota una bomba en la celda actual eliminando hasta 5 arboles en la celda actual y 3 en la celda lindante al norte si hay
+        PRECONDICIONES:
+            * Debe haber una bomba en la parcela actual
+    */
+    Sacar(bomba())//?Estaria bueno tener un color para representarla, en este caso no existe y no se debe sacar pero queda mejor 
+
+    SacarHasta_Arboles(5)//? se puede generalizar con un if adentro (semilla nutriente arbol bomba) pero no se me ocurre el nombre del parametro
+    if(puedeMover(Norte)){
+        Mover(Norte)
+        SacarHasta_Arboles(3)
+    }
+}
+procedure SacarHasta_Arboles(cantidad) {//!
+    /*
+    Propósito: Saca *cantidad* arboles de la celda actual
+    Parametros:
+        *cantidad:numero, la cantidad de arboles
+    Precondiciones:
+        *¨Debe haber al menos *cantidad* de arboles en la celda actual
+    */
+    repeat(cantidad){
+        Sacar(arbol())
+    }
+    
+}
+
+
+d. Polinizar(), los árboles en la celda actual polinizan la celda lindante en la dirección Este,
+generando tantas semillas en esa celda como árboles haya en la celda actual, menos 3. Por
+ejemplo, si en la celda actual hay 5 árboles, se generan 2 semillas en la celda lindante al Este. Si
+en la celda actual hay menos de 3 árboles, o no tiene lindante al Este, entonces no se hace
+nada.
+
+
+procedure Polinizar() {
+    /*
+        PROPÓSITO:  Poliniza la celda lindante en la direccion Este, generando una semilla por cada arbol a partir del cuarto árbol
+        PRECONDICIONES:
+            * Ninguna
+    */
+    if(puedeMover(Este)){
+        Poner_SemillasHacia_(cantidadDeArbolesAca(), Este)
+    }
+}
+
+Poner_Semillas(cantidad){
+    /*
+        Propósito: Poner *cantidad* semillas en la parcela actual
+        Parámetros:
+            *cantidad: numero, la cantidad de semillas a poner en la parcela actual
+        Precondiciones: Ninguna 
+                         
+    */
+    Poner_DeColor_(cantidad,Rojo)
+}
+
+
+Continuaremos utilizando el mismo dominio del banco de la práctica anterior. Esta vez, vamos a
+realizar funciones que nos permitan abstraernos de la representación subyacente, así como simplificar
+cálculos en nuestras operaciones.
+Se pide entonces que realice las siguientes funciones:
+a. pesos() que describe el color con el que se representan los pesos en el tablero, Negro.
+
+function pesos() {
+    /*
+        PROPÓSITO: Describe el color con el que se representan los pesos
+        TIPO: Color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Negro)
+}
+
+
+
+b. dólares() que describe el color con el que se representan los dólares en el tablero, Verde.
+
+function dolares() {
+    /*
+        PROPÓSITO: Describe el color con el que se representan los dolares
+        TIPO: Color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Verde)
+}
+
+
+c. euros() que describe el color con el que se representan los euros en el tablero, Azul.
+
+function euros() {
+    /*
+        PROPÓSITO:  Describe el color con el que se representan los euros
+        TIPO: Color
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (Azul)
+}
+
+d. yuanes() que describe el color con el que se representan los yuanes en el tablero, Rojo.
+
+
+function yuanes(){
+    /*
+    Propósito: Describe el color con el que se representan los yuanes
+    Tipo: Color
+    Precondiciones:
+        *Ninguna
+    */
+
+    return(Rojo)
+}
+
+e. ahorrosEn_(moneda) que dada una moneda, indica la cantidad de unidades de esa moneda
+en la cuenta actual.
+
+function ahorrosEn_(moneda) {
+    /*
+        PROPÓSITO:  Describe la cantidad ahorrada en *moneda* en la cuenta actual
+        PARÁMETROS:
+            * moneda:color, la moneda a contar
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    return (nroBolitas(moneda))
+}
+
+
+f. cuantosDolaresSePuedeComprarCon_Pesos(cantidadDePesos) que indica la cantidad
+de dólares que se pueden comprar con una cantidad de pesos dada.
+
+function cuantosDolaresSePuedeComprarCon_Pesos(cantidadDePesos){
+    /*
+    Propósito: Describe la cantidad de dolares que se pueden comprar con *cantidadDePesos* pesos
+    Parámetros:
+        *cantidadDePesos:numero, la cantidad de pesos a evaluar
+    Tipo:Numero
+    Precondiciones:
+        *Ninguna
+    */
+    return(cantidadDePesos div 80)
+}
+
+
+g. cuantosEurosSePuedeComprarCon_Pesos(cantidadDePesos) que indica la cantidad
+
+function cuantosEurosSePuedeComprarCon_Pesos(cantidadDePesos){
+    /*
+    Propósito: Describe la cantidad de euros que se pueden comprar con *cantidadDePesos* pesos
+    Parámetros:
+        *cantidadDePesos:numero, la cantidad de pesos a evaluar
+    Tipo:Numero
+    Precondiciones:
+        *Ninguna
+    */
+    return(cantidadDePesos div 90)
+}
+
+de euros que se pueden comprar con una cantidad de pesos dada.
+h. cuantosYuanesSePuedeComprarCon_Pesos(cantidadDePesos) que indica la cantidad
+
+function cuantosYuanesSePuedeComprarCon_Pesos(cantidadDePesos){
+    /*
+    Propósito: Describe la cantidad de yuanes que se pueden comprar con *cantidadDePesos* pesos
+    Parámetros:
+        *cantidadDePesos:numero, la cantidad de pesos a evaluar
+    Tipo:Numero
+    Precondiciones:
+        *Ninguna
+    */
+    return(cantidadDePesos div 12)
+}
+
+de yuanes que se pueden comprar con una cantidad de pesos dada.
+i. cuantosPesosSiVendo_Dólares(cantidadDeMonedaExtranjera) que indica la
+cantidad de pesos a obtener si se venden (depositan) la cantidad de dólares dada.
+
+function cuantosPesosSiVendo_Dólares(cantidadDeMonedaExtranjera){
+    /*
+        PROPÓSITO:  Describe la cantidad de pesos a recibir al vender *candidadDeMonedaExtranjera* dolares
+        PARÁMETROS:
+            * cantidadDeMonedaExtranjera: numero, la cantidad de dolares a vender
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (cantidadDeMonedaExtranjera * 80)
+}
+
+j. cuantosPesosSiVendo_Euros(cantidadDeMonedaExtranjera) que indica la cantidad
+de pesos a obtener si se venden (depositan) la cantidad de euros dada.
+
+function cuantosPesosSiVendo_Euros(cantidadDeMonedaExtranjera){
+    /*
+        PROPÓSITO:  Describe la cantidad de pesos a recibir al vender *candidadDeMonedaExtranjera* euros
+        PARÁMETROS:
+            * cantidadDeMonedaExtranjera: numero, la cantidad de euros a vender
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (cantidadDeMonedaExtranjera * 90)
+}
+
+
+function cuantosPesosSiVendo_Yuanes(cantidadDeMonedaExtranjera){
+    /*
+        PROPÓSITO:  Describe la cantidad de pesos a recibir al vender *candidadDeMonedaExtranjera* Yuanes
+        PARÁMETROS:
+            * cantidadDeMonedaExtranjera: numero, la cantidad de yuanes a vender
+        TIPO: Numero
+        PRECONDICIONES:
+            * Ninguna
+    */
+    
+    return (cantidadDeMonedaExtranjera * 12)
+}
+

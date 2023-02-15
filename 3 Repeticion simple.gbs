@@ -1,0 +1,54 @@
+procedure DibujarRectanguloRojoYnegroDe5x3(){
+    /*
+        Propósito: Dibuja un rectangulo rojo y negro de 5x3
+        Precondiciones: Debe haber al menos 5 celdas hacia el Este y 3 hacia el norte desde la celda actual
+
+    */
+    repeat(2){
+        PintarFilaDe4NegraYRoja
+        IrAlInicioDeLaSiguienteFila()
+    }
+    PintarFilaDe4NegraYRoja
+}
+
+procedure PintarFilaDe4NegraYRoja{
+    /*
+    Propósito: pinta una fila de 4 celdas hacia el este de color rojo y negro dejando el cabezal en la última celda
+    Precondiciones: Debe haber al menos 4 celdas hacia el este desde la celda actual
+    */
+    repeat (4){
+        Poner(Rojo)
+        Poner(Negro)
+        Mover(Este)
+    }
+    Poner(Rojo)
+    Poner(Negro)
+
+}
+
+procedure PintarTableroDeAzul(){
+    /*
+    Propósito: Pintar el tablero de azul 
+    Precondiciones: Las celdas del tablero deben estar vacías
+    Observaciones: Se asume que el tablero tiene 10 celdas de largo y 7 de alto 
+    */
+    repeat(6){
+        PintarFilaDe10Azul()
+        IrAlInicioDeLaSiguienteFila()
+    }
+    PintarFilaDe10Azul()
+}
+
+procedure PintarFilaDe10Azul{
+    /*
+    Propósito: pinta una fila de 10 celdas hacia el este de color Azul dejando el cabezal en la última celda
+    Precondiciones: Debe haber al menos 4 celdas hacia el este desde la celda actual
+    */
+    repeat (10){
+        Poner(Azul)
+        Mover(Este)
+    }
+    Poner(Rojo)
+    Poner(Negro)
+
+}

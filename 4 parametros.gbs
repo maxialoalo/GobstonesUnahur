@@ -1,0 +1,306 @@
+procedure Mover_VecesAl_(cantidad, direccion) {
+    /*
+        PROPÓSITO:  Mover **cantidad** veces al **direccion** dejando el cabezal en la ultima celda
+        PARÁMETROS:
+            * cantidad: numero, la cantidad de veces que se moverá
+            *direccion:direccion, la direccion hacia donde se moverá
+        PRECONDICIONES:
+            * Debe haber al menos **cantidad** de celdas en dirección **direccion**
+    */
+    repeat(cantidad){
+        Mover(direccion)
+    }
+}
+
+procedure Poner_DeColor_(cantidad, color){
+    /*
+    Propósito: Poner **cantidad* bolitas de color *color* en la celda actual
+    Parámetros: 
+        *cantidad: numero, la cantidad de bolitas a poner
+        *color: color, el color de las bolitas a poner
+    Precondiciones:
+        *Ninguna
+    */
+    repeat(cantidad){
+        Poner(color)
+    }
+}
+
+procedure Poner_Al_(colorAPoner, direccionDondePoner){
+    /*
+    Propósito: Poner una bolita de color *colorAPoner* en dirección *direccionDondePoner* desde la celda actual dejando el cabezal en dicha celda
+    Parametros:
+        *colorAPoner: color, el color de la bolita que se va a poner
+        *direccionDondePoner: direccion, la direccion hacia donde se pondrá la bolita
+    Precondiciones
+        *Debe haber al menos una celda en direccion *direccion* desde la celda actual
+    */
+    Mover(direccionDondePoner)
+    Poner(colorAPoner)
+}
+
+procedure PintarArcoiris(){
+    /*
+        Propósito: Pinta un arcoiris de los 4 colores de gobstones con dos celdas de distancia entre cada punto de cada color dejando el cabezal en el borde SurEste.
+
+        Precondiciones: Debe haber al menos 9 celdas al este desde la celda actual y deben estar vacias.
+    */
+    Pintar_Puntos_ConDistancia_Al_(3,Negro, 2, Este)
+    IrAlBorde(Oeste)
+    Mover(Este)
+    Pintar_Puntos_ConDistancia_Al_(3,Azul, 2, Este)
+    IrAlBorde(Oeste)
+    Mover_VecesAl_(2,Este)
+    Pintar_Puntos_ConDistancia_Al_(3,Rojo, 2, Este)
+    IrAlBorde(Oeste)
+    Mover(Norte)
+    Mover(Este)
+    Pintar_Puntos_ConDistancia_Al_(3,Verde, 2, Este)
+}
+
+
+procedure Pintar_Puntos_ConDistancia_Al_(cantidadDePuntos,colorDePuntos, distanciaEntrePuntos, direccion){
+    Poner(colorDePuntos)
+    repeat(cantidadDePuntos ){
+        Mover_VecesAl_(distanciaEntrePuntos, direccion)
+        Poner(colorDePuntos)
+    }
+}    
+
+
+14.Reloj analógico simplificado generalizado
+Generalizar el ejercicio del reloj analógico simplificado de la práctica anterior para que se pueda pasar
+el radio como parámetro. O sea, se le pide escribir un procedimiento llamado
+DibujarRelojAnalógicoSimplificadoDeRadio_(radio) que ponga los números del reloj
+como en el programa original, pero donde el radio recibido por parámetro indica la distancia al centro
+del reloj: mientras más grande es el radio, más alejados están los números del centro.
+Por ejemplo, el programa del ejercicio anterior podría obtenerse invocando al procedimiento con el
+comando DibujarRelojAnalógicoSimplificadoDeRadio_(2).
+
+//!RELOJ
+procedure DibujarRelojAnalógicoSimplicadoDeRadio_(radio){
+    /*
+    Propósito: Dibujar un reloj analogico simplicado de radio **radio** comenzando con el cabezal en el centro y dejando el cabezal en la misma celda al final.
+    Parámetros: 
+        *Radio: numero, describe el radio que va a tener el reloj
+    Precondiciones:
+        *El tablero debe tener al menos *radio* celdas en cada una de las direcciones desde la celda actual
+    */
+
+    Dibujar_EnDireccion_ConDistancia_(12,Norte,radio)
+    Dibujar_EnDireccion_ConDistancia_(3,Norte,radio)
+    Dibujar_EnDireccion_ConDistancia_(6,Este,radio)
+    Dibujar_EnDireccion_ConDistancia_(9,Sur,radio)
+}
+
+
+procedure Dibujar_EnDireccion_ConDistancia_(numero,direccion,distancia) {
+    /*
+        PROPÓSITO:  Dibuja el numero *numero* a *distancia* celdas desde la celda actual en direccion *direccion*
+        PARÁMETROS:
+            * Numero: numero. el numero a dibujar
+            * direccion: direccion la direccion hacia donde se dibujara
+            *distancia: numero, la distancia a la cual se dibujara
+        PRECONDICIONES:
+            * debe haber al menos *distancia* celdas en direccion *direccion* y la celda para dibujar el numero debe estar vacia
+    */
+    Mover_VecesAl_(distancia,direccion)
+    Poner_DeColor_(numero,Rojo)
+}
+
+//!El bosque
+
+Poner_Semillas(cantidad){
+    /*
+        Propósito: Poner *cantidad* semillas en la parcela actual
+        Parámetros:
+            *cantidad: numero, Indica la cantidad de semillas a poner en la parcela actual
+        Precondiciones: Ninguna 
+                         
+    */
+    Poner_DeColor_(cantidad,Rojo)
+}
+//ROJO
+Sacar_Semillas(cantidad){
+    /*
+        Propósito: Sacar *cantidad* semillas en la parcela actual
+        Parámetros:
+            *cantidad: numero, Indica la cantidad de semillas a Sacar en la parcela actual
+        Precondiciones: Debe haber al menos *cantidad* semillas en la parcela actual
+                         
+    */
+    Sacar_DeColor_(cantidad,Rojo)
+}
+
+
+Poner_Arboles(cantidad){
+/*
+        Propósito: Poner *cantidad* arboles en la parcela actual
+        Parámetros:
+            *cantidad: numero, Indica la cantidad de arboles a poner en la parcela actual
+        Precondiciones: Ninguna 
+                         
+    */
+    Poner_DeColor_(cantidad,Verde)
+}
+Sacar_Arboles(cantidad){
+/*
+        Propósito: Sacar *cantidad* arboles en la parcela actual
+        Parámetros:
+            *cantidad: numero, Indica la cantidad de arboles a sacar en la parcela actual
+        Precondiciones: Debe haber al menos *cantidad* arboles en la parcela actual
+                         
+    */
+    Sacar_DeColor_(cantidad,Verde)
+}
+
+Poner_Nutrientes(cantidad){
+/*
+        Propósito: Poner *cantidad* nutrientes en la parcela actual
+        Parámetros:
+            *cantidad: numero, Indica la cantidad de nutrientes a poner en la parcela actual
+        Precondiciones: Ninguna 
+                         
+    */
+    Poner_DeColor_(cantidad,Azul)
+} 
+Sacar_Nutrientes(cantidad){
+/*
+        Propósito: Sacar *cantidad* nutrientes en la parcela actual
+        Parámetros:
+            *cantidad: numero, Indica la cantidad de nutrientes a Sacar en la parcela actual
+        Precondiciones: Debe haber al menos *cantidad* nutrientes en la parecela actual
+                         
+    */
+    Sacar_DeColor_(cantidad,Azul)
+} 
+
+
+
+// 15.Mis iniciales salen fácil
+// EN PAPEL Escribir un programa que escriba sus iniciales en el tablero utilizando la primitiva de dibujo
+// DibujarLíneaHaciaEl_DeLargo_ que se supone primitiva. También puedeN utilizarse
+// procedimientos que hayan sido marcados como BIBLIOTECA hasta ahora.
+// Importante: ¿Hace falta que sigamos diciendo que debe primero escribirse el contrato y dividir el trabajo en
+// subtareas? ¿Qué tal una subtarea para cada letra? ¿Será razonable hacer una excepción a la regla de nombrar a
+// los procedimientos con verbos, para que el programa sea mucho más fácil de leer?
+// procedure DibujarLíneaHaciaEl_DeLargo_(dirección, largoDeLaLínea)
+/*
+PROPÓSITO:
+* Dibuja una línea de longitud **largoDeLaLínea** en dirección **dirección**,
+dejando el cabezal en la posición inicial.
+PARÁMETROS:
+* largoDeLaLínea: Número - La longitud de la línea que se dibuja
+* dirección : Dirección - La dirección hacia la que se dibuja la línea
+PRECONDICIONES:
+* La celda actual está vacía y debe haber al menos **largoDeLaLínea** celdas
+en
+dirección dirección.
+*/
+
+procedure EscribirMisInicialesEnElTablero() {
+    /*
+        PROPÓSITO:  Escribe las iniciales M y A en el tablero dejando el cabezal en el Borde Sureste
+        PRECONDICIONES:
+            * Debe haber al menos 9 celdas vacias hacia el Este de la celda actual y 4 celdas vacias hacia el Norte
+    */
+    DibujarM()
+    Mover(Este)
+    DibujarA()    
+}
+
+procedure DibujarM(){
+    /*
+    Propósito: Dibujar la letra M en el tablero dejando el cabezal en la última celda al Sureste de donde se dibujó
+    Precondiciones:
+        *Debe haber al menos 5 celdas hacia el Este y 4 celdas hacia el Norte
+    */
+    DibujarLíneaHaciaEl_DeLargo_(Norte, 4)
+    MoverEnDiagonalHaciaEl_Y_(Este,Sur)
+    Poner(Rojo)
+    MoverEnDiagonalHaciaEl_Y_(Este,Sur)
+    Poner(Rojo)
+    MoverEnDiagonalHaciaEl_Y_(Este,Norte)
+    Poner(Rojo)
+    MoverEnDiagonalHaciaEl_Y_(Este,Norte)
+    DibujarLineaHaciaEl_DeLargo_(Sur,4)
+}
+
+procedure DibujarA(){
+    /*
+    Propósito: Dibujar la letra A en el tablero dejando el cabezal en la última celda al Sureste de donde se dibujó
+    Precondiciones:
+        *Debe haber al menos 4 celdas hacia el Este y 4 celdas hacia el Norte
+    */
+    DibujarLíneaHaciaEl_DeLargo_(Norte, 3)
+    MoverEnDiagonalHaciaEl_Y_(Este,Norte)
+    Poner(Rojo)
+    MoverEnDiagonalHaciaEl_Y_(Este,Norte)
+    Poner(Rojo)
+    Mover(Este)
+    Poner(Rojo)
+    DibujarLineaHaciaEl_DeLargo_(Sur,3)
+}
+
+
+procedure MoverEnDiagonalHaciaEl_Y_(dir1,dir2){
+    /*
+    Propósito: Mueve el cabezal hacia el *dir1* y luego hacia el *dir2*
+    Parámetros:
+        *dir1: direccion, describe la primera direccion hacia donde se movera el cabezal
+        *dir2: direccion, describe la segunda direccion hacia donde se movera el cabezal
+    Precondiciones:
+        *Debe haber al menos una celda hacia el *dir1* seguido de otra celda hacia el *dir2*
+    */
+    Mover(dir1)
+    Mover(dir2)
+}
+
+
+
+
+
+
+InPr - P4. Parámetros
+16.Corrigiendo el cuadradito de Nova
+EN PAPEL ¡Nova volvió a hacer de las suyas! Esta vez, el código que escribió no funciona y hay que
+corregirlo. Parece que uno de los problemas de corrección está en el alcance de los parámetros, pero
+no es el único. Aprovechar también para mejorar los nombres de los procedimientos, y también para
+generalizar el tamaño del cuadrado
+procedure DibujarCuadrado_DeTamaño_(colorDelCuadrado,tamañoDelCuadrado) {
+    /*
+    PROPÓSITO: Dibuja un cuadrado sólido de *tamañoDelCuadrado de color **colorDelCuadrado** dejando el cabezal en el borde SurEste.
+    PARÁMETROS:
+    * colorDelCuadrado: color, Describe el color del cual se dibujará el cuadrado.
+    * tamañoDelCuadrado: numero, Describe le tamaño que tendrá el cuadrado
+    PRECONDICIONES:
+    * Debe existir al menos *tamañoDelCuadrado* -1 celdas vacías hacia el Norte y al Este de la celda actual
+    */
+    DibujarLíneaColor_HaciaEl_DeLargo_(coloDelCuadrado, Este, tamañoDelCuadrado)
+    repeat(tamañoDelCuadrado-1){
+        DibujarLíneaColor_HaciaEl_DeLargo_(coloDelCuadrado, Este, tamañoDelCuadrado)
+        Mover(Norte)
+    }
+
+
+}
+
+
+procedure DibujarLíneaColor_HaciaEl_DeLargo_(color, dirección, largoDeLaLínea){
+    /*
+    PROPÓSITO:
+    * Dibuja una línea de color *color* de longitud **largoDeLaLínea** en dirección **dirección**,
+    dejando el cabezal en la posición inicial.
+    PARÁMETROS:
+    * largoDeLaLínea: Número - La longitud de la línea que se dibuja
+    * dirección : Dirección - La dirección hacia la que se dibuja la línea
+    *color: color, el color del cual se dibujara la linea
+    PRECONDICIONES:
+        * La celda actual está vacía y debe haber al menos **largoDeLaLínea** celdas en dirección dirección.
+    */
+    repeat(largoDeLaLínea){
+        Poner(color)
+        Mover(direccion)
+    }
+    Poner(color)
+}
